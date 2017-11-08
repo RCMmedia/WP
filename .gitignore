@@ -11,7 +11,7 @@ wp-content/*
  
 # Ignore everything in the "themes" directory, except the themes you specify
 wp-content/themes/*
-!wp-content/themes/consumerconnect/
+!wp-content/themes/vue-master/
 
 
 .DS_Store
