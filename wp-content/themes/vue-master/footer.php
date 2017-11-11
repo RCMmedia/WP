@@ -13,12 +13,15 @@
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/app.js"></script>
     
     
+<!--
     <script>
 	    	    jQuery('#bh-sl-map-container').storeLocator({
 					'dataType': 'json',
-					'dataLocation': 'data/locations.json'
+					'dataLocation': 'data/locations.json',
+					'autoGeocode': true
 				});
 
     </script>
+-->
 </body>
 </html>

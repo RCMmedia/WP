@@ -31,16 +31,43 @@ var post = Vue.component('post', {
   	}
 });
 
-//show homepage content
+//show locations finder
 var locationfinder = Vue.component('location-finder', {
     template: '#location-finder-wrap',
-    created: function(){
-	    jQuery('#bh-sl-map-container').storeLocator({
+    data: function(){
+	    return {
+		    pageTitle: "Rubicon locations",
+		    loading: true
+		  }
+	    //pageTitle: "Rubicon locations"
+    },
+    mounted: function(){
+	   var vm = this
+	      $(this.$el).storeLocator({
 					'dataType': 'json',
-					'dataLocation': 'data/locations.json'
+					'dataLocation': 'data/locations.json',
+					'autoGeocode': false,
+					'geocodeID': 'get-geo',
+					'loadingContainer': '.location-loader',
+					'sessionStorage': false
 				});
-    }
+				this.loading = false;
+				
+/*
+				$("#get-geo").click(function() {
+					$('body').addClass('LFG');
+				});
+*/
+    },
+		computed: {
+			greet: function (event) {
+				$('body').addClass('LFG');
+			}
+			
+		}
 });
+
+
 
 //router
 var router = new VueRouter({
@@ -58,5 +85,6 @@ new Vue({
     created: function(){
 	    $('body').addClass('fadein');
     }
+    
 
 });
