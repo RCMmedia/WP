@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><?php if(is_home()) bloginfo('name'); else wp_title(''); ?></title>
+    <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url') ?>/style.css" />
     <?php wp_head(); ?>
 
 

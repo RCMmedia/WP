@@ -1,16 +1,21 @@
 <?php get_header(); ?>
 
+<div class="header">
+	
+</div>
 
 <div id="app">
 	<div class="nav">
 		<ul>
 			<li><router-link to="/">Home</router-link></li>
 			<li><router-link to="/posts">Posts</router-link></li>
-			<li><router-link to="/locations">Locations</router-link></li>
+<!-- 			<li><router-link to="/locations">Locations</router-link></li> -->
 		</ul>
 	</div>
 	
-<router-view></router-view>
+<transition name="fade">
+	<router-view></router-view>
+</transition>
 
 
   
@@ -41,10 +46,6 @@
 </template>
 
 <template id="post-single-template">
-
-	<div class="loading" v-if="loading">
-  	Loading...
-  </div>
   
 	<div v-else-if="post" class="post-list-wrap" >
 	 <div class="single-post" >
@@ -54,16 +55,21 @@
 				<img :src="field.image.sizes.thumbnail"/>
 			</div><!-- repeater-item -->
 		</div><!-- single-post -->
+		
+		<div class="loader" style="display: none;">
+			<img src="store-locator/three-dots.svg" />
+		</div>
 	</div><!-- post-list-wrap -->
 	
 </template>
 
-<template id="location-finder-wrap" >
+<template id="location-finder-wrap" v-once>
 
 <div v-if="!loading" class="bh-sl-container">
-	<div class="location-loader"></div>
 	
 	
+	
+
       <div id="page-header">
         <h1 class="bh-sl-title" >{{ pageTitle }}</h1>
         <button id="get-geo" v-on:click="greet($event)">get current location</button>
@@ -71,23 +77,29 @@
       </div>
 
       <div class="bh-sl-form-container">
+	      <div id="location-loader"></div>
         <form id="bh-sl-user-location" method="post" action="#">
             <div class="form-input">
               <label for="bh-sl-address">Enter Address or Zip Code:</label>
               <input type="text" id="bh-sl-address" name="bh-sl-address" />
             </div>
 
-            <button  id="bh-sl-submit" type="submit">Submit</button>
+            <button  id="bh-sl-submit" type="submit" v-on:click="greet($event)">Submit</button>
         </form>
       </div>
-
+			 <div class="loader" style="display: none;">
+			<img src="store-locator/three-dots.svg" />
+		</div>
       <div id="bh-sl-map-container" class="bh-sl-map-container">
         <div id="bh-sl-map" class="bh-sl-map"></div>
         <div class="bh-sl-loc-list">
           <ul class="list"></ul>
         </div>
       </div>
+      
+     
     </div>
+    
     
 </template>
 

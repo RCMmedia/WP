@@ -37,7 +37,8 @@ var locationfinder = Vue.component('location-finder', {
     data: function(){
 	    return {
 		    pageTitle: "Rubicon locations",
-		    loading: true
+		    loading: true,
+		    spinner: false
 		  }
 	    //pageTitle: "Rubicon locations"
     },
@@ -48,9 +49,27 @@ var locationfinder = Vue.component('location-finder', {
 					'dataLocation': 'data/locations.json',
 					'autoGeocode': false,
 					'geocodeID': 'get-geo',
-					'loadingContainer': '.location-loader',
-					'sessionStorage': false
+					//'loadingContainer': 'location-loader',
+					'sessionStorage': false,
+					'loading': true,
+					callbackMapSet: function(){
+						// Whatever you want here
+						console.log('map loaded');
+						$('.loader').hide();
+					}
 				});
+/*
+				
+				function doSomethingOnSuccess() {
+					// Whatever you want here
+					console.log('map loaded')
+				}
+				
+				$(this.$el).storeLocator({
+					callbackMapSet: doSomethingOnSuccess()
+				});
+				
+*/
 				this.loading = false;
 				
 /*
@@ -61,7 +80,8 @@ var locationfinder = Vue.component('location-finder', {
     },
 		computed: {
 			greet: function (event) {
-				$('body').addClass('LFG');
+				$('.loader').show();
+				this.spinner = true
 			}
 			
 		}
